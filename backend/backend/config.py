@@ -1,5 +1,4 @@
-from pydantic_settings import BaseSettings
-
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     POSTGRES_DB: str
@@ -11,12 +10,9 @@ class Settings(BaseSettings):
     DJANGO_SECRET_KEY: str
     DJANGO_DEBUG: bool = False
 
-    # Скорее всего, ты забыл добавить вот эти две строчки:
     DJANGO_ALLOWED_HOSTS: str
     DJANGO_CORS_ORIGINS: str
 
-    class Config:
-        env_file = "../.env"
-
+    model_config = SettingsConfigDict(env_file="../.env")
 
 env = Settings()  # type: ignore[call-arg]

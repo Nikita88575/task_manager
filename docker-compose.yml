@@ -1,0 +1,44 @@
+# docker-compose.yml
+services:
+  # 1. База данных
+  db:
+    image: postgres:latest
+    container_name: task_db
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - "5433:5432"
+
+  # 2. Django Бэкенд
+  backend:
+    build: 
+      context: ./backend
+    container_name: task_backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    # Монтируем код, чтобы изменения в файлах сразу отражались без перезапуска контейнера (Hot Reload)
+    volumes:
+      - ./backend:/app
+
+  # 3. React Фронтенд
+  frontend:
+    build: 
+      context: ./frontend
+    container_name: task_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    # Монтируем код для мгновенного обновления интерфейса
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Исключаем node_modules из монтирования, чтобы использовать те, что установились внутри контейнера
+
+volumes:
+  postgres_data:

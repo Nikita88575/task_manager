@@ -1,0 +1,34 @@
+name: React 19 Frontend CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./frontend 
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24' 
+        cache: 'npm'       
+        cache-dependency-path: ./frontend/package-lock.json
+
+    - name: Install dependencies
+      # Имитируем чистую установку, строго по package-lock.json
+      run: npm ci 
+
+    - name: Run ESLint
+      # Проверка на качество кода, неиспользуемые переменные и т.д.
+      run: npm run lint
+
+    - name: Test Build (React Compiler)
+      # САМЫЙ ВАЖНЫЙ ШАГ: проверяем, сможет ли Vite собрать проект для продакшена.
+      # Если есть кривые импорты или ошибки компиляции React 19, сборка упадет здесь.
+      run: npm run build

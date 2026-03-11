@@ -6,18 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tasks', '0002_initial'),
+        ("tasks", "0002_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='task',
-            name='due_date',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Дедлайн'),
+            model_name="task",
+            name="due_date",
+            field=models.DateTimeField(blank=True, null=True, verbose_name="Дедлайн"),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='priority',
-            field=models.CharField(choices=[('HIGH', 'High'), ('MEDIUM', 'Medium'), ('LOW', 'Low')], default='MEDIUM', max_length=10),
+            model_name="task",
+            name="priority",
+            field=models.CharField(
+                choices=[("HIGH", "High"), ("MEDIUM", "Medium"), ("LOW", "Low")],
+                default="MEDIUM",
+                max_length=10,
+            ),
         ),
     ]

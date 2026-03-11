@@ -46,6 +46,7 @@ api.interceptors.response.use(
                     localStorage.removeItem('access');
                     localStorage.removeItem('refresh');
                     window.location.href = '/'; // На страницу логина
+                    console.error(err);
                 }
             }
         }

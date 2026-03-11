@@ -15,6 +15,7 @@ export default function LoginForm({ onLogin, onSwitchToRegister }) {
       onLogin(); 
       return { success: true };
     } catch (error) {
+      console.error(error);
       return { error: 'Неверное имя пользователя или пароль' };
     }
   }, null);

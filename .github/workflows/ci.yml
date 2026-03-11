@@ -49,7 +49,14 @@ jobs:
       run: isort --check-only .
 
     - name: Run mypy
-      run: mypy .
+      env:
+        POSTGRES_DB: dummy
+        POSTGRES_USER: dummy
+        POSTGRES_PASSWORD: dummy
+        DJANGO_SECRET_KEY: dummy_secret_key
+        DJANGO_ALLOWED_HOSTS: localhost
+        DJANGO_CORS_ORIGINS: http://localhost:5173
+      run: mypy . # Или make mypy, смотря как у тебя написано
 
     - name: Run tests with coverage
       # Прокидываем переменные для Pydantic и подключения к тестовой БД

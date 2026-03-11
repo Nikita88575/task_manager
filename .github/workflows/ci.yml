@@ -6,6 +6,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
+    # === ТОТ САМЫЙ ОБЩИЙ "ENV" ДЛЯ ВСЕГО ПАЙПЛАЙНА ===
+    # Эти переменные будут доступны КАЖДОМУ шагу (step) ниже
+    env:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      DJANGO_SECRET_KEY: ci-dummy-secret-key-123
+      DJANGO_DEBUG: False
+      DJANGO_ALLOWED_HOSTS: localhost
+      DJANGO_CORS_ORIGINS: http://localhost:5173
+
     # Поднимаем БД для тестов
     services:
       postgres:
@@ -49,23 +62,9 @@ jobs:
       run: isort --check-only .
 
     - name: Run mypy
-      env:
-        POSTGRES_DB: dummy
-        POSTGRES_USER: dummy
-        POSTGRES_PASSWORD: dummy
-        DJANGO_SECRET_KEY: dummy_secret_key
-        DJANGO_ALLOWED_HOSTS: localhost
-        DJANGO_CORS_ORIGINS: http://localhost:5173
-      run: mypy . # Или make mypy, смотря как у тебя написано
+      run: mypy .
 
     - name: Run tests with coverage
-      # Прокидываем переменные для Pydantic и подключения к тестовой БД
-      env:
-        POSTGRES_DB: test_db
-        POSTGRES_USER: test_user
-        POSTGRES_PASSWORD: test_password
-        DJANGO_SECRET_KEY: ci-dummy-secret-key-123
-        DJANGO_DEBUG: False
       run: |
         coverage run -m pytest
         coverage report --fail-under=80

@@ -5,20 +5,20 @@ export default function TaskFilter({ filter, setFilter, search, setSearch }) {
         <button 
           className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
           onClick={() => setFilter('all')}
-        >Все</button>
+        >All</button>
         <button 
           className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
           onClick={() => setFilter('active')}
-        >Активные</button>
+        >Active</button>
         <button 
           className={`filter-btn ${filter === 'completed' ? 'active' : ''}`}
           onClick={() => setFilter('completed')}
-        >Завершенные</button>
+        >Completed</button>
       </div>
 
       <input 
         type="text" 
-        placeholder="Поиск задач..." 
+        placeholder="Search tasks..." 
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="task-search-input"

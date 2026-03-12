@@ -7,8 +7,8 @@ export default function TaskList({ tasks, onToggleTask, onDeleteTask }) {
     return (
       <div className="empty-state">
         <div className="empty-icon">☕</div>
-        <h3>Ура! На сегодня задач нет.</h3>
-        <p>Можно отдохнуть или добавить новые.</p>
+        <h3>No tasks available</h3>
+        <p>Can rest or add new tasks.</p>
       </div>
     );
   }

@@ -16,33 +16,32 @@ export default function LoginForm({ onLogin, onSwitchToRegister }) {
       return { success: true };
     } catch (error) {
       console.error(error);
-      return { error: 'Неверное имя пользователя или пароль' };
+      return { error: 'Invalid username or password' };
     }
   }, null);
 
   return (
     <Card className="auth-card">
-      <h2>Вход в систему</h2>
+      <h2>Log in</h2>
       
       <form action={formAction} className="auth-form">
         {state?.error && <div className="error-message">{state.error}</div>}
 
         <div className="input-group">
-          <input type="text" name="username" placeholder="Имя пользователя" required />
+          <input type="text" name="username" placeholder="Username" required />
         </div>
 
         <div className="input-group">
-          <input type="password" name="password" placeholder="Пароль" required />
+          <input type="password" name="password" placeholder="Password" required />
         </div>
 
         {/* Наша новая умная кнопка */}
-        <Button type="submit" variant="primary">Войти</Button>
+        <Button type="submit" variant="primary">Log in</Button>
       </form>
 
      <p className="auth-footer">
-      Нет аккаунта?{' '}
-      {/* Убедись, что onClick именно на этом элементе */}
-      <span onClick={onSwitchToRegister} className="link">Зарегистрироваться</span>
+      Don't have an account?{' '}
+      <span onClick={onSwitchToRegister} className="link">Sign up</span>
      </p>
     </Card>
   );

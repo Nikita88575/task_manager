@@ -20,7 +20,7 @@ export default function TaskForm({ onAddTask }) {
     // Берем дату не из formData, а из нашего стейта, и переводим в формат ISO для Django
     const due_date = selectedDate ? selectedDate.toISOString() : null;
 
-    if (!title.trim()) return { error: 'Задача не может быть пустой' };
+    if (!title.trim()) return { error: 'Task cannot be empty' };
 
     try {
       await onAddTask({ title, priority, due_date });
@@ -29,7 +29,7 @@ export default function TaskForm({ onAddTask }) {
       return { success: true };
     } catch (error) {
       console.error(error);
-      return { error: 'Не удалось добавить задачу' };
+      return { error: 'Failed to add task' };
     }
   }, null);
 
@@ -41,7 +41,7 @@ export default function TaskForm({ onAddTask }) {
         <input 
           type="text" 
           name="title" 
-          placeholder="Что нужно сделать?" 
+          placeholder="What needs to be done ?" 
           required 
           className="task-input-main"
         />
@@ -54,10 +54,10 @@ export default function TaskForm({ onAddTask }) {
             showTimeSelect
             timeFormat="HH:mm"       // 24-часовой формат времени в выпадающем списке
             timeIntervals={15}       // Шаг времени (15 минут)
-            timeCaption="Время"
+            timeCaption="Time"
             dateFormat="dd.MM.yyyy HH:mm" // ТОТ САМЫЙ европейский формат
             locale="ua"             
-            placeholderText="Дедлайн"
+            placeholderText="Deadline"
             className="task-date-input"
             isClearable              // Появляется крестик, чтобы очистить дату
           />

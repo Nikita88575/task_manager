@@ -55,7 +55,7 @@ export default function TaskDashboard({ onLogout }) {
       <header className="dashboard-header">
         <h1 className="logo-text">⚡ Task Manager</h1>
         <button onClick={onLogout} className="logout-btn">
-          🚪 Выйти
+          🚪 Log out
         </button>
       </header>
 

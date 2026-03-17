@@ -127,8 +127,8 @@ docker-compose stop
 | Метод | Ендпоінт | Опис | Тіло запиту (JSON) | Відповідь (Успіх) |
 | :--- | :--- | :--- | :--- | :--- |
 | **GET** | `/tasks/` | Отримати всі завдання | ***None*** | `200 OK [{"id": 1, ...}]` |
-| **POST** | `/tasks/` | Створити завдання | `{"username": "user1", "password": "pwd"}` | `201 Created` |
-| **PATCH** | `/tasks/{id}/` | Часткове оновлення | `{"refresh": "..."}` | `200 OK` (access) |
+| **POST** | `/tasks/` | Створити завдання | `{"title": "Зробити звіт", "priority": "high"}` | `201 Created` |
+| **PATCH** | `/tasks/{id}/` | Часткове оновлення | `{"completed": true}` | `200 OK` |
 | **DELETE** | `/tasks/{id}/` | Видалення завдання | ***None*** | `204 No Content` |
 
 ### 📄 3. Структура моделі <code>Task</code>

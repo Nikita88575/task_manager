@@ -80,7 +80,6 @@ export default function ProgressStats({ tasks }) {
               options={{ 
                 plugins: { legend: { display: false } }, 
                 maintainAspectRatio: false, 
-                
               }} 
             />
             {/* Центр кольца */}

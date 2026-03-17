@@ -9,7 +9,7 @@ async function registerAction(prevState, formData) {
   const re_password = formData.get('re_password');
 
   if (password !== re_password) {
-    return { error: 'Пароли не совпадают' };
+    return { error: 'Passwords do not match' };
   }
 
   try {
@@ -17,7 +17,7 @@ async function registerAction(prevState, formData) {
     return { success: true };
   } catch (error) {
     const errorData = error.response?.data;
-    const errorMsg = errorData?.username?.[0] || errorData?.password?.[0] || 'Ошибка при регистрации';
+    const errorMsg = errorData?.username?.[0] || errorData?.password?.[0] || 'Error during registration';
     return { error: errorMsg };
   }
 }
@@ -28,10 +28,10 @@ export default function RegisterForm({ onSwitchToLogin }) {
   if (state?.success) {
     return (
       <Card className="auth-card">
-        <h2>Регистрация успешна!</h2>
-        <p>Теперь вы можете войти в свой аккаунт.</p>
+        <h2>Registration successful!</h2>
+        <p>You can now log in to your account.</p>
         <button onClick={onSwitchToLogin} className="switch-button link">
-          Перейти ко входу
+          Go to login
         </button>
       </Card>
     );
@@ -39,29 +39,29 @@ export default function RegisterForm({ onSwitchToLogin }) {
 
   return (
     <Card className="auth-card">
-      <h2>Создать аккаунт</h2>
+      <h2>Create Account</h2>
       
       <form action={action} className="auth-form">
         {state?.error && <div className="error-message">{state.error}</div>}
 
         <div className="input-group">
-          <input type="text" name="username" placeholder="Имя пользователя" required />
+          <input type="text" name="username" placeholder="Username" required />
         </div>
 
         <div className="input-group">
-          <input type="password" name="password" placeholder="Пароль" required minLength="8" />
+          <input type="password" name="password" placeholder="Password" required minLength="8" />
         </div>
 
         <div className="input-group">
-          <input type="password" name="re_password" placeholder="Повторите пароль" required minLength="8" />
+          <input type="password" name="re_password" placeholder="Confirm Password" required minLength="8" />
         </div>
 
-        <Button type="submit" variant="primary">Зарегистрироваться</Button>
+        <Button type="submit" variant="primary">Sign up</Button>
       </form>
 
       <p className="auth-footer">
-        Уже есть аккаунт?{' '}
-        <span onClick={onSwitchToLogin} className="link">Войти</span>
+        Already have an account?{' '}
+        <span onClick={onSwitchToLogin} className="link">Log in</span>
       </p>
     </Card>
   );

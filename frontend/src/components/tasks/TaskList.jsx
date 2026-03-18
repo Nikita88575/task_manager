@@ -1,6 +1,6 @@
 import TaskItem from './TaskItem';
 
-export default function TaskList({ tasks, onToggleTask, onDeleteTask }) {
+export default function TaskList({ tasks, onToggleTask, onDeleteTask, onEditTask }) {
   
   // Если массив пустой, показываем заглушку
   if (!tasks || tasks.length === 0) {
@@ -20,7 +20,8 @@ export default function TaskList({ tasks, onToggleTask, onDeleteTask }) {
           key={task.id} 
           task={task} 
           onToggle={onToggleTask} 
-          onDelete={onDeleteTask} 
+          onDelete={onDeleteTask}
+          onEdit={onEditTask}
         />
       ))}
     </div>

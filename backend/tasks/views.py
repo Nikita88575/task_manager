@@ -10,26 +10,24 @@ from .serializers import TaskSerializer
 
 class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated]
 
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
         filters.OrderingFilter,
     ]
-    filterset_fields = ["completed", "priority"]  
-    search_fields = ["title"] 
+    filterset_fields = ["completed", "priority"]
+    search_fields = ["title"]
     ordering_fields = ["created_at", "priority"]
-    ordering = ["-created_at"] 
+    ordering = ["-created_at"]
 
     def get_queryset(self) -> QuerySet:
         user = self.request.user
 
         if user.is_authenticated:
             return Task.objects.filter(user=user)
-        return (
-            Task.objects.none()
-        )
+        return Task.objects.none()
 
     def perform_create(self, serializer: BaseSerializer) -> None:
         user = self.request.user

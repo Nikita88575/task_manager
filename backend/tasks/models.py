@@ -9,7 +9,6 @@ class Task(models.Model):
         ("LOW", "Low"),
     )
 
-    # Связь: Одна задача -> Один пользователь. Удалим юзера = удалятся его задачи.
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tasks"
     )

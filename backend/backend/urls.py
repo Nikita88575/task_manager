@@ -20,10 +20,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # Наши задачи
     path("api/tasks/", include("tasks.urls")),
-    # Эндпоинты Djoser для регистрации (/api/auth/users/)
-    # и логина/токенов (/api/auth/jwt/create/)
     path("api/auth/", include("djoser.urls")),
     path("api/auth/", include("djoser.urls.jwt")),
 ]

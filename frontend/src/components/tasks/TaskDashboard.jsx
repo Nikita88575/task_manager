@@ -43,7 +43,6 @@ export default function TaskDashboard({ onLogout }) {
     setTasks(tasks.filter(t => t.id !== taskId));
   };
 
-  // Новая функция для сохранения отредактированного текста
   const handleEditTask = async (taskId, newTitle) => {
     const response = await api.patch(`tasks/${taskId}/`, { title: newTitle });
     setTasks(tasks.map(t => t.id === taskId ? response.data : t));
@@ -51,7 +50,6 @@ export default function TaskDashboard({ onLogout }) {
 
   return (
     <div className="dashboard-container">
-      {/* Шапка с выходом */}
       <header className="dashboard-header">
         <h1 className="logo-text">⚡ Task Manager</h1>
         <button onClick={onLogout} className="logout-btn">
@@ -60,12 +58,10 @@ export default function TaskDashboard({ onLogout }) {
       </header>
 
       <div className="dashboard-grid">
-        {/* Левая колонка: Статистика */}
         <aside className="dashboard-sidebar">
           <ProgressStats tasks={tasks} />
         </aside>
 
-        {/* Правая колонка: Форма и Задачи */}
         <main className="dashboard-main">
           <TaskForm onAddTask={handleAddTask} />
           
@@ -79,7 +75,7 @@ export default function TaskDashboard({ onLogout }) {
               tasks={tasks} 
               onToggleTask={handleToggleTask} 
               onDeleteTask={handleDeleteTask}
-              onEditTask={handleEditTask} // Передаем функцию редактирования
+              onEditTask={handleEditTask} 
             />
           </div>
         </main>

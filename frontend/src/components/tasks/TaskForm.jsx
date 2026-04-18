@@ -4,20 +4,17 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ru } from 'date-fns/locale/ru';
 
-// Регистрируем русскую локаль (чтобы были понедельники, а не Monday, и 24 часа)
 registerLocale('ru', ru);
 
 export default function TaskForm({ onAddTask }) {
   const formRef = useRef(null);
   
-  // Создаем стейт для хранения выбранной даты
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [state, formAction] = useActionState(async (prevState, formData) => {
     const title = formData.get('title');
     const priority = formData.get('priority');
     
-    // Берем дату не из formData, а из нашего стейта, и переводим в формат ISO для Django
     const due_date = selectedDate ? selectedDate.toISOString() : null;
 
     if (!title.trim()) return { error: 'Task cannot be empty' };
@@ -25,7 +22,7 @@ export default function TaskForm({ onAddTask }) {
     try {
       await onAddTask({ title, priority, due_date });
       formRef.current?.reset();
-      setSelectedDate(null); // Очищаем календарь после успешного добавления
+      setSelectedDate(null); 
       return { success: true };
     } catch (error) {
       console.error(error);
@@ -46,20 +43,19 @@ export default function TaskForm({ onAddTask }) {
           className="task-input-main"
         />
         
-        {/* НАШ НОВЫЙ ИДЕАЛЬНЫЙ КАЛЕНДАРЬ */}
         <div className="date-picker-wrapper">
           <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             showTimeSelect
-            timeFormat="HH:mm"       // 24-часовой формат времени в выпадающем списке
-            timeIntervals={15}       // Шаг времени (15 минут)
+            timeFormat="HH:mm"       
+            timeIntervals={15}       
             timeCaption="Time"
-            dateFormat="dd.MM.yyyy HH:mm" // ТОТ САМЫЙ европейский формат
+            dateFormat="dd.MM.yyyy HH:mm" 
             locale="ua"             
             placeholderText="Deadline"
             className="task-date-input"
-            isClearable              // Появляется крестик, чтобы очистить дату
+            isClearable             
           />
         </div>
 

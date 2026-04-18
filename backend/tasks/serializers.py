@@ -16,6 +16,4 @@ class TaskSerializer(serializers.ModelSerializer):
             "user",
         )
 
-        # Эти поля клиент не должен передавать при создании/обновлении.
-        # user подставляется автоматически из токена, created_at генерируется БД.
         read_only_fields = ("id", "created_at", "user")

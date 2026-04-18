@@ -8,7 +8,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function ProgressStats({ tasks }) {
   const [timeRange, setTimeRange] = useState('all'); // 'today', 'week', 'all'
 
-  // 1. Фильтрация по времени
   const now = new Date();
   const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const weekStart = new Date(todayStart);
@@ -18,34 +17,31 @@ export default function ProgressStats({ tasks }) {
     const taskDate = new Date(task.created_at);
     if (timeRange === 'today') return taskDate >= todayStart;
     if (timeRange === 'week') return taskDate >= weekStart;
-    return true; // 'all'
+    return true; 
   });
 
   const total = filteredTasks.length;
   const completedTotal = filteredTasks.filter(t => t.completed).length;
   const progressPercent = total === 0 ? 0 : Math.round((completedTotal / total) * 100);
 
-  // 2. Считаем НЕВЫПОЛНЕННЫЕ (это будет серая/пустая часть)
   const pendingTotal = total - completedTotal;
 
-  // 3. Считаем ВЫПОЛНЕННЫЕ по приоритетам (это будут цветные куски)
   const completedHigh = filteredTasks.filter(t => t.completed && t.priority === 'HIGH').length;
   const completedMedium = filteredTasks.filter(t => t.completed && t.priority === 'MEDIUM').length;
   const completedLow = filteredTasks.filter(t => t.completed && t.priority === 'LOW').length;
 
-  // 4. Собираем график: Серое (Осталось) + Красное (Готово Выс) + Желтое (Готово Ср) + Зеленое (Готово Лич)
   const chartData = {
     labels: ['Completed: High', 'Completed: Medium', 'Completed: Low', 'Pending'],
     datasets: [{
       data: [completedHigh, completedMedium, completedLow, pendingTotal],
       backgroundColor: [
-          '#ef4444', // Красный
-          '#f59e0b', // Желтый
-          '#10b981', // Зеленый
-          '#334155', // Серый (slate-700) - невыполненная часть
+          '#ef4444', 
+          '#f59e0b', 
+          '#10b981', 
+          '#334155', 
       ],
       borderWidth: 0,
-      cutout: '80%', // Толщина кольца
+      cutout: '80%', 
     }]
   };
 
@@ -82,7 +78,6 @@ export default function ProgressStats({ tasks }) {
                 maintainAspectRatio: false, 
               }} 
             />
-            {/* Центр кольца */}
             <div className="chart-center-text">
                {progressPercent}%
                <span className="chart-center-sub">completed</span>
@@ -91,7 +86,6 @@ export default function ProgressStats({ tasks }) {
         )}
       </div>
       
-      {/* Легенда под графиком */}
       {total > 0 && (
         <div className="stats-legend-grid">
           <div className="legend-item"><span className="dot gray"></span> Pending: {pendingTotal}</div>

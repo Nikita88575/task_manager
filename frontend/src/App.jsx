@@ -5,8 +5,6 @@ import TaskDashboard from './components/tasks/TaskDashboard';
 import './styles/index.css';
 
 export default function App() {
-  // Ленивая инициализация состояния: React прочитает localStorage только один раз при запуске.
-  // Оператор !! превращает строку с токеном в true, а null - в false.
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('access'));
   
   const [isRegister, setIsRegister] = useState(false);

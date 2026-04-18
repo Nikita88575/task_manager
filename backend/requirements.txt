@@ -32,9 +32,9 @@ platformdirs==4.9.4
 pluggy==1.6.0
 psycopg2-binary==2.9.11
 pycparser==3.0
-pydantic==2.12.5
+pydantic==2.13.2
 pydantic-settings==2.13.1
-pydantic_core==2.41.5
+pydantic_core==2.46.2
 Pygments==2.20.0
 PyJWT==2.12.1
 pytest==9.0.3

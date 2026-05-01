@@ -46,7 +46,7 @@ requests==2.33.1
 requests-oauthlib==2.0.0
 rich==14.3.3
 social-auth-app-django==5.7.0
-social-auth-core==4.8.5
+social-auth-core==4.9.1
 sqlparse==0.5.5
 stevedore==5.7.0
 types-PyYAML==6.0.12.20250915
